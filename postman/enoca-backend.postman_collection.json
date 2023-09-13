@@ -1,0 +1,487 @@
+{
+	"info": {
+		"_postman_id": "df199417-8077-4785-8608-c94b99c3e23e",
+		"name": "enoca-backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24961794"
+	},
+	"item": [
+		{
+			"name": "UserRegister",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZXMiOiJBRE1JTiIsImlhdCI6MTY5NDU4NzkzNiwiZXhwIjoxNjk0NTg5MTM2fQ.7rz9SBLcKb70Qp9a3kZj1Yp9u0gsjPkmYpGUebqA1Pp6JWhsUVSBEdKNdDdyqPvYsR10iMKK5IzOv939MYCvDw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Akito1\",\r\n    \"password\": \"1234\",\r\n    \"role\": \"ADMIN\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/auth/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UserLogin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZXMiOiJBRE1JTiIsImlhdCI6MTY5NDU4OTIyOCwiZXhwIjoxNjk0NTkwNDI4fQ.ja2ajUCRIN4FLjiZ9Yyhd5OLZbQuUDYTqfdwc4Hdh7NeHnP690Ljerx6Vd_7vrce_rgRZQtW5j1q0KSJw9xCNA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Akito1\",\r\n    \"password\" :\"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/auth/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreaateDepartment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwicm9sZXMiOiJBRE1JTiIsImlhdCI6MTY5NDU5MjQxNSwiZXhwIjoxNjk0NTkzNjE1fQ._EE7RtSrIaG6w-9EQqkLNeLshKRvWZxl4RsHuXU6t7dn2_yuo9XL2vLjTH7GnbBrk-FEdCpz3JDjgZnbt3NNFA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"IK\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/admin/department/createDepartment",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"department",
+						"createDepartment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListDepartment",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwicm9sZXMiOiJBRE1JTiIsImlhdCI6MTY5NDU5MjQxNSwiZXhwIjoxNjk0NTkzNjE1fQ._EE7RtSrIaG6w-9EQqkLNeLshKRvWZxl4RsHuXU6t7dn2_yuo9XL2vLjTH7GnbBrk-FEdCpz3JDjgZnbt3NNFA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/admin/department/listDepartment",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"department",
+						"listDepartment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RefreshToken",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZXMiOiJBRE1JTiIsImlhdCI6MTY5NDU4ODE1OSwiZXhwIjoxNjk0NTg5MzU5fQ.QjxAxCq_4Lg48PHPvLVoaGxGpjkK8Ss-Kk7EueCkchvUhZNOTZzScA-Q7gDbJg_q-tPXqby3GvVtWTbXlhrOFQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/admin/department/getDepartment/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"department",
+						"getDepartment",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateDepartment",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwicm9sZXMiOiJBRE1JTiIsImlhdCI6MTY5NDU5MjQxNSwiZXhwIjoxNjk0NTkzNjE1fQ._EE7RtSrIaG6w-9EQqkLNeLshKRvWZxl4RsHuXU6t7dn2_yuo9XL2vLjTH7GnbBrk-FEdCpz3JDjgZnbt3NNFA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Developer\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/admin/department/updateDepartment/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"department",
+						"updateDepartment",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteDepartment",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZXMiOiJBRE1JTiIsImlhdCI6MTY5NDU4ODE1OSwiZXhwIjoxNjk0NTg5MzU5fQ.QjxAxCq_4Lg48PHPvLVoaGxGpjkK8Ss-Kk7EueCkchvUhZNOTZzScA-Q7gDbJg_q-tPXqby3GvVtWTbXlhrOFQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/admin/department/deleteDepartment/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"department",
+						"deleteDepartment",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateEmployee",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwicm9sZXMiOiJBRE1JTiIsImlhdCI6MTY5NDU5MzIyMiwiZXhwIjoxNjk0NTk0NDIyfQ.oXMO7txgLgzIk93R3M86IJ9hwy7yXbWOwFTB4ZZk_0wL55jzQTdhycGFn4HsTAKD1OELLkFhSMWLvZBjaeJKow",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Akın\",\r\n    \"surname\": \"Altunbaş\",\r\n    \"salary\": 10000,\r\n    \"email\": \"akin.altunbas@hotmail.com\",\r\n    \"password\": \"1234,\",\r\n    \"role\": \"USER\",\r\n    \"department\" : {\r\n        \"id\":1,\r\n        \"name\":\"IT\"\r\n    }\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/admin/employee/createEmployee",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"employee",
+						"createEmployee"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListEmployee",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZXMiOiJVU0VSIiwiaWF0IjoxNjk0NTkyMjIwLCJleHAiOjE2OTQ1OTM0MjB9.J0FXna7r7oE_NvIKU6DjY4ENXWJF_b5Qb1L-jgkqw7AO4bBfJZlVkwm2cb2CqJrhrvy18z71ISWnTRfpoOVOMw",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/admin/employee/listEmployee",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"employee",
+						"listEmployee"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetEmployee",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZXMiOiJBRE1JTiIsImlhdCI6MTY5NDU5MDg3MSwiZXhwIjoxNjk0NTkyMDcxfQ.Ai-3kJSn1uDxep6mKC-H0wen_S4qcxr_0QB4K3ASNaiYKQXcOsFfYhnHtkc30KdXvW_wqt2JZ25En-gtXwRgmQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/admin/employee/getEmployee/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"employee",
+						"getEmployee",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateEmployee",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZXMiOiJBRE1JTiIsImlhdCI6MTY5NDU5MDg3MSwiZXhwIjoxNjk0NTkyMDcxfQ.Ai-3kJSn1uDxep6mKC-H0wen_S4qcxr_0QB4K3ASNaiYKQXcOsFfYhnHtkc30KdXvW_wqt2JZ25En-gtXwRgmQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Ali\",\r\n    \"surname\": \"Altunbaş\",\r\n    \"salary\": 10000,\r\n    \"email\": \"akin.altunbas@hotmail.com\",\r\n    \"password\": \"1234,\",\r\n    \"department\": null,\r\n    \"role\": \"USER\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/admin/employee/updateEmployee/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"employee",
+						"updateEmployee",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteEmployee",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZXMiOiJBRE1JTiIsImlhdCI6MTY5NDU5MDg3MSwiZXhwIjoxNjk0NTkyMDcxfQ.Ai-3kJSn1uDxep6mKC-H0wen_S4qcxr_0QB4K3ASNaiYKQXcOsFfYhnHtkc30KdXvW_wqt2JZ25En-gtXwRgmQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/admin/employee/deleteEmployee/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"employee",
+						"deleteEmployee",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EmployeeListDepartment",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwicm9sZXMiOiJBRE1JTiIsImlhdCI6MTY5NDU5MjQxNSwiZXhwIjoxNjk0NTkzNjE1fQ._EE7RtSrIaG6w-9EQqkLNeLshKRvWZxl4RsHuXU6t7dn2_yuo9XL2vLjTH7GnbBrk-FEdCpz3JDjgZnbt3NNFA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/employee/department/listDepartment",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employee",
+						"department",
+						"listDepartment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EmployeUpdateProfile",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwicm9sZXMiOiJVU0VSIiwiaWF0IjoxNjk0NTk1NDUxLCJleHAiOjE2OTQ1OTY2NTF9.Zb5saBebu5Q0-df4lfVwR5mQBc8gvVdXUhCsM2nKyxR0l-R5hWPhhjpTxQngOvoQwA1KBA79uQJekUqOVVY5vQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Anıl\",\r\n    \"surname\":\"Altunbasş\",\r\n    \"email\" :\"anıl@hotmail.com\",\r\n    \"password\": \"12234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/employee/updateProfile/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employee",
+						"updateProfile",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RefrehToken",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AUT",
+						"value": "b1c3ec0d-ff92-4841-b9c6-86215d7e3d70",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\":\"1\",\r\n    \"refreshToken\":\"b1c3ec0d-ff92-4841-b9c6-86215d7e3d70\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/auth/refresh",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"refresh"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
