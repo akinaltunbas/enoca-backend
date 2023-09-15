@@ -5,8 +5,7 @@ import lombok.Data;
 @Data
 public class RefreshTokenRequestDto {
 	
-
-	Long userId;
-	String refreshToken;
+	private Long userId;
+	private String refreshToken;
 
 }

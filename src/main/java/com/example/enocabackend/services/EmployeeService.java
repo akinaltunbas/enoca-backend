@@ -6,6 +6,7 @@ import com.example.enocabackend.dto.EmployeeCreateRequestDto;
 import com.example.enocabackend.dto.EmployeeUpdateProfileRequestDto;
 import com.example.enocabackend.dto.EmployeeUpdateRequestDto;
 import com.example.enocabackend.entities.Employee;
+import org.springframework.http.ResponseEntity;
 
 public interface EmployeeService {
 	

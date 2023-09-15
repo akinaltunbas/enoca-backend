@@ -26,7 +26,7 @@ import com.example.enocabackend.dto.UserCreateRequestDto;
 import com.example.enocabackend.dto.UserUpdateRequestDto;
 import com.example.enocabackend.entities.Role;
 import com.example.enocabackend.entities.User;
-import com.example.enocabackend.entities.repository.UserRepository;
+import com.example.enocabackend.repository.UserRepository;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceImplTest {

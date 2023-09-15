@@ -9,28 +9,24 @@ import org.springframework.stereotype.Service;
 import com.example.enocabackend.dto.UserCreateRequestDto;
 import com.example.enocabackend.dto.UserUpdateRequestDto;
 import com.example.enocabackend.entities.User;
-import com.example.enocabackend.entities.repository.UserRepository;
+import com.example.enocabackend.repository.UserRepository;
+;
 
 
 @Service
 public class UserServiceImpl implements UserService{
 
 	private UserRepository userRepository;
-	
-	private PasswordEncoder passwordEncoder;
 
 
 	public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-		
 		this.userRepository = userRepository;
-		this.passwordEncoder = passwordEncoder;
 	}
 
 	@Override
 	public User createOneUser(UserCreateRequestDto newUserRequest) {
 		User user = new User();
 		newUserRequest.mapUserCreateRquestDto(user);;
-	//	user.setPassword(passwordEncoder.encode(newUserRequest.getPassword()));
 		return userRepository.save(user);
 	}
 
@@ -50,20 +46,18 @@ public class UserServiceImpl implements UserService{
 		Optional<User> user = userRepository.findById(userId);
 		if(user.isPresent()) {
 			User user1 = user.get();
-			updateUserRequest.mapUserUpdateRquestDto(user1);
+			updateUserRequest.mapUserUpdateRequestDto(user1);
 			userRepository.save(user1);
 			
 			return user1;
 		}
 		return null;
 	}
-
 	
 	@Override
 	public List<User> getAllUsers() {
 		return userRepository.findAll();
 	}
-
 
 	@Override
 	public User getOneUserByUserName(String username) {

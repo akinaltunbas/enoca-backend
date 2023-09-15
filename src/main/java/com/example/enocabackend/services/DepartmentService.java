@@ -1,10 +1,10 @@
 package com.example.enocabackend.services;
 
-import java.util.List;
-
 import com.example.enocabackend.dto.DepartmentCreateRequestDto;
 import com.example.enocabackend.dto.DepartmentUpdateRequestDto;
 import com.example.enocabackend.entities.Department;
+
+import java.util.List;
 
 public interface DepartmentService {
 	

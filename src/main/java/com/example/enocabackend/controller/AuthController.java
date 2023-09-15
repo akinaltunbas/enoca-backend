@@ -29,8 +29,8 @@ public class AuthController {
 			return new ResponseEntity<>(authService.registerUser(registerRequest), HttpStatus.CREATED);
 		}
 	@PostMapping("/login")
-	public AuthResponseDto login(@RequestBody UserLoginRequestDto loginRequest) {
-		return authService.loginUser(loginRequest);
+	public ResponseEntity<AuthResponseDto> login(@RequestBody UserLoginRequestDto loginRequest) {
+		return new ResponseEntity<>(authService.loginUser(loginRequest), HttpStatus.OK);
 	}
 	
 	@PostMapping("/refresh")
@@ -38,5 +38,4 @@ public class AuthController {
 			return new ResponseEntity<>(authService.refreshToken(refreshRequest), HttpStatus.OK);		
 	} 	
 }
-
 

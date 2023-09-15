@@ -1,6 +1,7 @@
 package com.example.enocabackend.services;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Date;
 
@@ -16,7 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.example.enocabackend.entities.RefreshToken;
 import com.example.enocabackend.entities.Role;
 import com.example.enocabackend.entities.User;
-import com.example.enocabackend.entities.repository.RefreshTokenRepository;
+import com.example.enocabackend.repository.RefreshTokenRepository;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -79,19 +80,6 @@ public class RefreshTokenServiceTest {
 		
 		//then
 		assertThat(savedToken).isNull();
-	}
-	
-
-	@DisplayName("Junit test for isRefreshExpired")
-	@Test
-	public void testIsRefreshExpired() {
-		
-		//given
-		Long expireSeconds = 604800L;
-		RefreshToken token = new RefreshToken();
-		
-		assertThat(token).isNotNull();
-		
 	}
 
 }

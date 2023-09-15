@@ -7,12 +7,12 @@ import lombok.Data;
 
 @Data
 public class UserUpdateRequestDto {
-	
+
 	private String username;
 	private String password;
 	private Role role;
 	
-	public void mapUserUpdateRquestDto(User user) {
+	public void mapUserUpdateRequestDto(User user) {
 		user.setUsername(this.getUsername());
 		user.setPassword(this.getPassword());
 		user.setRole(this.getRole());

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 
 import com.example.enocabackend.entities.User;
-import com.example.enocabackend.entities.repository.UserRepository;
+import com.example.enocabackend.repository.UserRepository;
 import com.example.enocabackend.security.JwtUserDetails;
 
 @Service

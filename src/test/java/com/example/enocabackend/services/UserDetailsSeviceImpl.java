@@ -17,7 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.example.enocabackend.entities.User;
-import com.example.enocabackend.entities.repository.UserRepository;
+import com.example.enocabackend.repository.UserRepository;
 import com.example.enocabackend.entities.Role;
 
 

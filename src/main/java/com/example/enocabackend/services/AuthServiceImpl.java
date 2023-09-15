@@ -1,22 +1,19 @@
 package com.example.enocabackend.services;
 
+import com.example.enocabackend.dto.AuthResponseDto;
+import com.example.enocabackend.dto.RefreshTokenRequestDto;
+import com.example.enocabackend.dto.UserLoginRequestDto;
+import com.example.enocabackend.dto.UserRegisterRequestDto;
+import com.example.enocabackend.dto.constants.ResponseMessages;
+import com.example.enocabackend.entities.RefreshToken;
+import com.example.enocabackend.entities.User;
+import com.example.enocabackend.security.JwtTokenProvider;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import com.example.enocabackend.dto.AuthResponseDto;
-import com.example.enocabackend.dto.RefreshTokenRequestDto;
-import com.example.enocabackend.dto.UserLoginRequestDto;
-import com.example.enocabackend.entities.RefreshToken;
-import com.example.enocabackend.security.JwtTokenProvider;
-import com.example.enocabackend.services.UserService;
-import com.example.enocabackend.dto.UserRegisterRequestDto;
-import com.example.enocabackend.entities.User;
-import com.example.enocabackend.services.RefreshTokenServiceImpl;
-import com.example.enocabackend.services.UserServiceImpl;
 
 
 @Service
@@ -52,6 +49,7 @@ private AuthenticationManager authenticationManager;
 		String jwtToken = jwtTokenProvider.generateJwtToken(auth);
 		User user = userService.getOneUserByUserName(loginRequest.getUsername());
 		AuthResponseDto authResponse = new AuthResponseDto();
+		authResponse.setMessage(ResponseMessages.LOGIN_SUCCESS.getMessage());
 		authResponse.setAccessToken("Bearer " + jwtToken);
 		authResponse.setRefreshToken(refreshTokenService.createRefreshToken(user));
 		authResponse.setUserId(user.getId());
@@ -63,7 +61,7 @@ private AuthenticationManager authenticationManager;
 	public AuthResponseDto registerUser(UserRegisterRequestDto registerRequest) {
 		AuthResponseDto authResponse = new AuthResponseDto();
 		if(userService.getOneUserByUserName(registerRequest.getUsername()) != null) {
-			authResponse.setMessage("Username already in use.");
+			authResponse.setMessage(ResponseMessages.USER_IN_USE.getMessage());
 			return authResponse;
 		}
 		
@@ -78,7 +76,7 @@ private AuthenticationManager authenticationManager;
 		SecurityContextHolder.getContext().setAuthentication(auth);
 		String jwtToken = jwtTokenProvider.generateJwtToken(auth);
 		
-		authResponse.setMessage("User successfully registered.");
+		authResponse.setMessage(ResponseMessages.REGISTERED.getMessage());
 		authResponse.setAccessToken("Bearer " + jwtToken);
 		authResponse.setRefreshToken(refreshTokenService.createRefreshToken(user));
 		authResponse.setUserId(user.getId());
@@ -94,13 +92,12 @@ private AuthenticationManager authenticationManager;
 
 			User user = token.getUser();
 			String jwtToken = jwtTokenProvider.generateJwtTokenByUserId(user.getId());
-			response.setMessage("token successfully refreshed.");
+			response.setMessage(ResponseMessages.TOKEN_REFRESHED.getMessage());
 			response.setAccessToken("Bearer " + jwtToken);
 			response.setUserId(user.getId());
 				
 		} else {
-			response.setMessage("refresh token is not valid.");
-			
+			response.setMessage(ResponseMessages.TOKEN_NOT_VALID.getMessage());
 		}
 		return response;
 		

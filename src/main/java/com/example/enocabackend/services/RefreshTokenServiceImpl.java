@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.enocabackend.entities.RefreshToken;
 import com.example.enocabackend.entities.User;
-import com.example.enocabackend.entities.repository.RefreshTokenRepository;
-import com.example.enocabackend.entities.repository.UserRepository;
+import com.example.enocabackend.repository.RefreshTokenRepository;
+import com.example.enocabackend.repository.UserRepository;
 
 
 @Service

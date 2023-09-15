@@ -1,5 +1,7 @@
 package com.example.enocabackend.controller.employee;
 
+import com.example.enocabackend.dto.constants.ResponseMessages;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +23,8 @@ public class EmployeeController {
 	}
 	
 	@PutMapping("/updateProfile/{employeeId}")
-	public Employee updateprofile(@PathVariable Long employeeId, @RequestBody EmployeeUpdateProfileRequestDto updateProfileRequest) {
-		return employeeService.updateEmployeeProfile(employeeId, updateProfileRequest);
+	public ResponseEntity<String> updateprofile(@PathVariable Long employeeId, @RequestBody EmployeeUpdateProfileRequestDto updateProfileRequest) {
+		 employeeService.updateEmployeeProfile(employeeId, updateProfileRequest);
+		 return ResponseEntity.ok(ResponseMessages.EMPLOYEE_UPDATED.getMessage());
 	}
 }

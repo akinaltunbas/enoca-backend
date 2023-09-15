@@ -1,21 +1,15 @@
 package com.example.enocabackend.controller.admin;
 
-import java.util.List;
-
-
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.example.enocabackend.dto.DepartmentCreateRequestDto;
 import com.example.enocabackend.dto.DepartmentUpdateRequestDto;
+import com.example.enocabackend.dto.constants.ResponseMessages;
 import com.example.enocabackend.entities.Department;
 import com.example.enocabackend.services.DepartmentServiceImpl;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/admin/department")
@@ -26,31 +20,33 @@ public class AdminDepartmentController {
 	public AdminDepartmentController(DepartmentServiceImpl departmentService) {
 		this.departmentService = departmentService;
 	}
-	
+
 	@PostMapping("/createDepartment")
-	public Department createOneDepartment(@RequestBody DepartmentCreateRequestDto newDepartmentRequest) {
-		return departmentService.createOneDepartment(newDepartmentRequest);
+	public ResponseEntity<String> createOneDepartment(@RequestBody DepartmentCreateRequestDto newDepartmentRequest) {
+		departmentService.createOneDepartment(newDepartmentRequest);
+		return ResponseEntity.ok(ResponseMessages.DEPARTMENT_CREATED.getMessage());
 	}
 	
 	@GetMapping("/listDepartment")
-	public List<Department> getAllDepartments() {
-		return departmentService.getAllDepartments();
+	public ResponseEntity<List<Department>> getAllDepartments() {
+		return new ResponseEntity<>(departmentService.getAllDepartments(), HttpStatus.OK);
 	}
 	
 	@GetMapping("/getDepartment/{departmentId}")
-	public Department getOneDepartment(@PathVariable Long departmentId) {
-		return departmentService.getDepartmentById(departmentId);
+	public ResponseEntity<Department> getOneDepartment(@PathVariable Long departmentId) {
+		return new ResponseEntity<>(departmentService.getDepartmentById(departmentId), HttpStatus.OK);
 	}
 	
 	@PutMapping("/updateDepartment/{departmentId}") 
-	public Department updateOneDepartment(@PathVariable Long departmentId, @RequestBody DepartmentUpdateRequestDto updateDepartmentRequest) {
-		return departmentService.updateOneDepartmentById(departmentId, updateDepartmentRequest);
+	public ResponseEntity<String> updateOneDepartment(@PathVariable Long departmentId, @RequestBody DepartmentUpdateRequestDto updateDepartmentRequest) {
+		departmentService.updateOneDepartmentById(departmentId, updateDepartmentRequest);
+		return ResponseEntity.ok(ResponseMessages.DEPARTMENT_UPDATED.getMessage());
 	}
 	
 	@DeleteMapping("/deleteDepartment/{departmentId}")
-	public void deleteOneDepartment(@PathVariable Long departmentId) {
+	public ResponseEntity<String> deleteOneDepartment(@PathVariable Long departmentId) {
 		 departmentService.deleteOneDepartmentById(departmentId);
+		return ResponseEntity.ok(ResponseMessages.DEPARTMENT_DELETED.getMessage());
 	}
-	
 	
 }

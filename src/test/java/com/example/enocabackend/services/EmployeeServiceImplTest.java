@@ -33,9 +33,9 @@ import com.example.enocabackend.dto.EmployeeUpdateProfileRequestDto;
 import com.example.enocabackend.dto.EmployeeUpdateRequestDto;
 import com.example.enocabackend.entities.Department;
 import com.example.enocabackend.entities.Employee;
-import com.example.enocabackend.entities.repository.EmployeeRepository;
 import com.example.enocabackend.exception.DepartmentNotFoundException;
 import com.example.enocabackend.exception.EmployeeNotFoundException;
+import com.example.enocabackend.repository.EmployeeRepository;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -55,7 +55,6 @@ public class EmployeeServiceImplTest {
 	@BeforeEach
 	public void setup() {
 		employee = Employee.builder()
-						   .id(1L)
 						   .name("Akin")
 						   .surname("Altun")
 						   .salary(10000)
@@ -95,7 +94,6 @@ public class EmployeeServiceImplTest {
 		
 		//given 
 		Employee employee2 = Employee.builder()
-				   .id(2L)
 				   .name("Ali")
 				   .surname("Akyıldız")
 				   .salary(10000)
@@ -120,7 +118,7 @@ public class EmployeeServiceImplTest {
 		given(employeeRepository.findById(1L)).willReturn(Optional.of(employee));
 		
 		// when
-		Employee savedEmployee =employeeService.getOneEmployeeById(employee.getId());
+		Employee savedEmployee =employeeService.getOneEmployeeById(1L);
 		
 		//then
 		assertThat(savedEmployee).isNotNull();
@@ -145,6 +143,7 @@ public class EmployeeServiceImplTest {
 		
 		// given
 		long employeeId = 1L;
+		given(employeeRepository.findById(employeeId)).willReturn(Optional.of(employee));
 		willDoNothing().given(employeeRepository).deleteById(employeeId);
 		
 		// when
@@ -166,7 +165,7 @@ public class EmployeeServiceImplTest {
 		given(employeeRepository.findById(1L)).willReturn(Optional.of(employee));
 		
 		// when
-		Employee savedEmployee = employeeService.getOneEmployeeById(employee.getId());
+		Employee savedEmployee = employeeService.getOneEmployeeById(1L);
 		
 		//then
 		assertThat(savedEmployee).isNotNull();
@@ -232,7 +231,7 @@ public class EmployeeServiceImplTest {
 	public void givenEmployee_whenUpdateEmployeeProfile_thenReturnUpdateEmployeeProfile() {
 		
 		//given
-		EmployeeUpdateProfileRequestDto updateProfileRequest = new EmployeeUpdateProfileRequestDto();
+		EmployeeUpdateProfileRequestDto updateProfileRequest = EmployeeUpdateProfileRequestDto.builder().build();
 		long employeeId= 1L;
 		given(employeeRepository.findById(1L)).willReturn(Optional.of(employee));
 		given (employeeRepository.save(employee)).willReturn(employee);
@@ -259,13 +258,20 @@ public class EmployeeServiceImplTest {
 	@Test
 	public void testUpdateEmployeeProfileNullId() {
 		
-		EmployeeUpdateProfileRequestDto updateEmployeeRequest = new EmployeeUpdateProfileRequestDto();
+		EmployeeUpdateProfileRequestDto updateEmployeeRequest = EmployeeUpdateProfileRequestDto.
+				builder().name("Ayşe").surname("Altunbaş").email("ayse.altunbas@ziraat.com").password("1234").build();
+
+
 		Long employeeId=1L;
 		
-		assertThrows(EmployeeNotFoundException.class, () -> {
+		Exception exception = assertThrows(EmployeeNotFoundException.class, () -> {
 			Employee savedEmployee = employeeService.updateEmployeeProfile(employeeId, updateEmployeeRequest);
-			savedEmployee.setId(null);
 	    });
+
+		String expectedMessage = "Employee not found with id : 1";
+		String actualMessage = exception.getMessage();
+
+		assertTrue(actualMessage.contains(expectedMessage));
 	
 	}
 	

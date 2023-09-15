@@ -1,10 +1,11 @@
 package com.example.enocabackend.dto;
 
 import com.example.enocabackend.entities.Employee;
-
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class EmployeeUpdateProfileRequestDto {
 	
 	private String name;

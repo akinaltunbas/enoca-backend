@@ -1,20 +1,15 @@
 package com.example.enocabackend.controller.admin;
 
-import java.util.List;
-
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.example.enocabackend.dto.EmployeeCreateRequestDto;
 import com.example.enocabackend.dto.EmployeeUpdateRequestDto;
+import com.example.enocabackend.dto.constants.ResponseMessages;
 import com.example.enocabackend.entities.Employee;
 import com.example.enocabackend.services.EmployeeServiceImpl;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/admin/employee")
@@ -26,32 +21,31 @@ private EmployeeServiceImpl employeeService;
 	}
 	 
 	@PostMapping("/createEmployee")
-	public Employee createOneEmployee(@RequestBody EmployeeCreateRequestDto newEmployeeRequest) {
-		return employeeService.createOneEmployee(newEmployeeRequest);
+	public ResponseEntity<String> createOneEmployee(@RequestBody EmployeeCreateRequestDto newEmployeeRequest) {
+		 employeeService.createOneEmployee(newEmployeeRequest);
+		 return ResponseEntity.ok(ResponseMessages.EMPLOYEE_CREATED.getMessage());
 	}
 	
 	@GetMapping("/listEmployee")
-	public List<Employee> getAllEmployees() {
-		return employeeService.getAllEmployees();
+	public ResponseEntity<List<Employee>> getAllEmployees() {
+		return new ResponseEntity<>(employeeService.getAllEmployees(), HttpStatus.OK) ;
 	}
 	
 	@GetMapping("/getEmployee/{employeeId}")
-	public Employee getOneEmployee(@PathVariable Long employeeId) {
-		return employeeService.getOneEmployeeById(employeeId);
+	public ResponseEntity<Employee> getOneEmployee(@PathVariable Long employeeId) {
+		return new ResponseEntity<>(employeeService.getOneEmployeeById(employeeId),HttpStatus.OK);
 	}
 	
 	@PutMapping("/updateEmployee/{employeeId}")
-	public Employee updateOneEmployee(@PathVariable Long employeeId, @RequestBody EmployeeUpdateRequestDto updateEmployeeRequest) {
-		return employeeService.updateOneEmployeeById(employeeId, updateEmployeeRequest);
+	public ResponseEntity<String> updateOneEmployee(@PathVariable Long employeeId, @RequestBody EmployeeUpdateRequestDto updateEmployeeRequest) {
+		 employeeService.updateOneEmployeeById(employeeId, updateEmployeeRequest);
+		return ResponseEntity.ok(ResponseMessages.EMPLOYEE_UPDATED.getMessage());
 	}
 	
 	@DeleteMapping("/deleteEmployee/{employeeId}")
-	public void deleteOneEmployee(@PathVariable Long employeeId) {
+	public ResponseEntity<String> deleteOneEmployee(@PathVariable Long employeeId) {
 		employeeService.deleteOneEmployeeById(employeeId);
-	}	
-		
-	
-	
-	
+		return ResponseEntity.ok(ResponseMessages.EMPLOYEE_DELETED.getMessage());
+	}
 
 }
