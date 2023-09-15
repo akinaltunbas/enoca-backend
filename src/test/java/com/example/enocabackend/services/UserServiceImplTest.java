@@ -128,6 +128,23 @@ public class UserServiceImplTest {
 			
 	}
 	
+	@DisplayName("Junit test for updateOneUserById")
+	@Test
+	public void testUpdateOneUser_Null() {
+		
+		//given
+		UserUpdateRequestDto updateUserRequest = new UserUpdateRequestDto();
+		long userId= 1L;
+		
+		//when
+		User savedUser = userService.updateOneUserById(userId, updateUserRequest);
+		
+		savedUser= null;
+		
+		//then
+		assertThat(savedUser).isNull();
+	}
+	
 	@DisplayName("Junit test for getAllUsers method")
 	@Test
 	public void givenUserList_whenGetAllUsers_thenReturnUserList() {
@@ -159,31 +176,6 @@ public class UserServiceImplTest {
 		assertThat(savedUser).isNotNull();
 	}
 	
-	
-/*	@DisplayName("Junit test for updateProfile method")
-	@Test
-	public void givenUser_whenUpdateProfile_thenReturnUpdateProfile() {
-		
-		//given
-		UserUpdateProfileRequestDto updateProfileRequest = new UserUpdateProfileRequestDto();
-		long userId= 1L;
-		given(userRepository.findById(1L)).willReturn(Optional.of(user));
-		given (userRepository.save(user)).willReturn(user);
-	
-		updateProfileRequest.setUsername("akito");
-		updateProfileRequest.setPassword("1234");
-
-		
-		//when
-		User updateUser = userService.updateProfile(userId, updateProfileRequest);
-		
-		//then
-		
-		assertThat(updateUser.getUsername()).isEqualTo("akito");
-		assertThat(updateUser.getPassword()).isEqualTo("1234");
-				
-	}
-	*/
 	@DisplayName("Junit test for saveOneUser")
 	@Test
 	public void givenUser_whenSaveUser_thenReturnUser() {

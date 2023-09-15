@@ -2,6 +2,7 @@ package com.example.enocabackend.services;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.willDoNothing;
 import static org.mockito.Mockito.times;
@@ -25,6 +26,7 @@ import com.example.enocabackend.dto.DepartmentCreateRequestDto;
 import com.example.enocabackend.dto.DepartmentUpdateRequestDto;
 import com.example.enocabackend.entities.Department;
 import com.example.enocabackend.entities.repository.DepartmentRepository;
+import com.example.enocabackend.exception.DepartmentNotFoundException;
 
 @ExtendWith(MockitoExtension.class)
 public class DepartmentServiceImplTest {
@@ -49,7 +51,7 @@ public class DepartmentServiceImplTest {
 
 	@DisplayName("JUnit test for createOneDepartment")
 	@Test
-	public void givenShare_whenCreateShare_thenReturnShare() {
+	public void givenDepartment_whenCreateDepartment_thenReturnDepartment() {
 		
 		//given
 		DepartmentCreateRequestDto departmentRequestDto = new DepartmentCreateRequestDto();
@@ -70,24 +72,24 @@ public class DepartmentServiceImplTest {
 
 	@DisplayName("junit test for deleteOneDepartmentById method")
 	@Test
-	public void givenTravelId_whenDeleteOneTravel_thenNothing() {
+	public void givenDepartmentId_whenDeleteOneDepartment_thenNothing() {
+
+		// given
+		long departmentId = 2L;
+		willDoNothing().given(departmentRepository).deleteById(departmentId);
 		
-		//given
-		long travelId = 1L;
-		
-		willDoNothing().given(departmentRepository).deleteById(travelId);
-		
-		//when
-		departmentService.deleteOneDepartmentById(travelId);
+		// when
+		departmentService.deleteOneDepartmentById(departmentId);
 		
 		//then
-		verify(departmentRepository, times(1)).deleteById(travelId);
+		verify(departmentRepository, times(1)).deleteById(departmentId);
+		
 		
 	}
 	
 	@DisplayName("JUnit test for getAllDepartments method")
 	@Test
-	public void givenShareList_whenGetAllShares_thenReturnShareList() {
+	public void givenDepartmentList_whenGetAllDepartments_thenReturnDepartmentList() {
 		
 		//given 
 		Department department2 = Department.builder()
@@ -107,21 +109,33 @@ public class DepartmentServiceImplTest {
 	
 	@DisplayName("JUnit test for getDepartmentById")
 	@Test
-	public void givenShareId_whenGetShareById_thenReturnShare() {
-		
+	public void givenDepartment_whenGetDepartmentById_thenReturnDepartment() {
+
 		// given
 		given(departmentRepository.findById(1L)).willReturn(Optional.of(department));
 		
 		// when
-		Department savedShare = departmentService.getDepartmentById(department.getId());
+		Department savedDepartment = departmentService.getDepartmentById(department.getId());
 		
 		//then
-		assertThat(savedShare).isNotNull();
+		assertThat(savedDepartment).isNotNull();
+		
 	}
 	
-	@DisplayName("JUnit test for updateOneShareById method")
+
+	@DisplayName("JUnit test for getDepartmentById")
 	@Test
-	public void givenShare_whenUpdateShare_thenReturnUpdateShare() {
+	public void testDepartmentThrows() {
+	
+		assertThrows(DepartmentNotFoundException.class,
+				() -> departmentService.getDepartmentById(3L));
+		
+	}
+	
+	
+	@DisplayName("JUnit test for updateOneDepartmentById method")
+	@Test
+	public void givenDepartment_whenUpdateDepartment_thenReturnUpdateDepartment() {
 		
 		//given
 		DepartmentUpdateRequestDto updateDepartmentRequest = new DepartmentUpdateRequestDto();
@@ -133,8 +147,22 @@ public class DepartmentServiceImplTest {
 		//when 
 		Department updateDepartment = departmentService.updateOneDepartmentById(departmentId, updateDepartmentRequest);
 		
-		// then -verify the output
-		assertThat(updateDepartment.getName()).isEqualTo("Maliye");
+		// then 
+		assertThat(updateDepartment.getName()).isEqualTo("Muhasebe");
+	
+	}
+	
+	@DisplayName("JUnit test for updateOneDepartmentById method")
+	@Test
+	public void givenDepartment_whenUpdateDepartment_thenReturnThrowsDepartment() {
+		
+		DepartmentUpdateRequestDto updateDepartmentRequest = new DepartmentUpdateRequestDto();
+		Long departmanId=1L;
+		
+		assertThrows(DepartmentNotFoundException.class, () -> {
+			Department savedDepartment = departmentService.updateOneDepartmentById(departmanId, updateDepartmentRequest);
+			savedDepartment.setId(null);
+	    });
 	
 	}
 	

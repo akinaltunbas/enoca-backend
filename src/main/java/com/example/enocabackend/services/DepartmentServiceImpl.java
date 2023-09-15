@@ -1,19 +1,19 @@
 package com.example.enocabackend.services;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.stereotype.Service;
-
 import com.example.enocabackend.dto.DepartmentCreateRequestDto;
 import com.example.enocabackend.dto.DepartmentUpdateRequestDto;
 import com.example.enocabackend.entities.Department;
 import com.example.enocabackend.entities.repository.DepartmentRepository;
+import com.example.enocabackend.exception.DepartmentNotFoundException;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
-public class DepartmentServiceImpl implements DepartmentService{
+public class DepartmentServiceImpl implements DepartmentService {
 	
-	private DepartmentRepository departmentRepository;
+private final DepartmentRepository departmentRepository;
 	
 	public DepartmentServiceImpl(DepartmentRepository departmentRepository) {
 		this.departmentRepository = departmentRepository;
@@ -24,16 +24,18 @@ public class DepartmentServiceImpl implements DepartmentService{
 		Department department = new Department();
 		newDepartmentRequest.mapDepartmentRequestDto(department);
 		return departmentRepository.save(department);
+		
 	}
 
 	@Override
-	public List<Department> getAllDepartments() {
+	public List<Department> getAllDepartments() {	
 		return departmentRepository.findAll();
+		
 	}
 
 	@Override
 	public Department getDepartmentById(Long departmentId) {
-		return departmentRepository.findById(departmentId).orElse(null);
+		return departmentRepository.findById(departmentId).orElseThrow(() -> new DepartmentNotFoundException(departmentId));
 	}
 
 	@Override
@@ -45,14 +47,16 @@ public class DepartmentServiceImpl implements DepartmentService{
 			departmentRepository.save(departmentUpdate);
 			return departmentUpdate;
 		}
-		
-		return null;
+		else {
+			throw  new DepartmentNotFoundException(departmentId);
+		}
 	}
 
 	@Override
 	public void deleteOneDepartmentById(Long departmentId) {
-		departmentRepository.deleteById(departmentId);
 		
+		departmentRepository.deleteById(departmentId);
+			  
 	}
 
 }

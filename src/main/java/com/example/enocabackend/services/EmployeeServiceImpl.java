@@ -3,6 +3,7 @@ package com.example.enocabackend.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.enocabackend.exception.EmployeeNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.example.enocabackend.dto.EmployeeCreateRequestDto;
@@ -14,14 +15,17 @@ import com.example.enocabackend.entities.repository.EmployeeRepository;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 	
-	private EmployeeRepository employeeRepository;
+	private final EmployeeRepository employeeRepository;
+
+	private final DepartmentService departmentService;
 	
-	public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+	public EmployeeServiceImpl(EmployeeRepository employeeRepository, DepartmentService departmentService) {
 		this.employeeRepository = employeeRepository;
+		this.departmentService = departmentService;
 	}
 
 	@Override
-	public Employee createOneEmploye(EmployeeCreateRequestDto newEmployeeRequest) {
+	public Employee createOneEmployee(EmployeeCreateRequestDto newEmployeeRequest) {
 		Employee employee = new Employee();
 		newEmployeeRequest.mapEmployeeCreateRequestDto(employee);
 		return employeeRepository.save(employee);
@@ -34,7 +38,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public Employee getOneEmployeeById(Long employeeId) {
-		return employeeRepository.findById(employeeId).orElse(null);
+		return employeeRepository.findById(employeeId).orElseThrow(() -> new EmployeeNotFoundException(employeeId));
 	}
 
 	@Override
@@ -45,13 +49,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 			updateEmployeeRequest.mapEmployeeUpdateRequestDto(employeeUpdate);
 			employeeRepository.save(employeeUpdate);
 			return employeeUpdate;
+		}else {
+			throw new EmployeeNotFoundException(employeeId);
 		}
-		return null;
 	}
 
 	@Override
-	public void deleteOneEmployeeById(Long departmentId) {
-		employeeRepository.deleteById(departmentId);
+	public void deleteOneEmployeeById(Long employeeId) {
+		employeeRepository.deleteById(employeeId);
+		employeeRepository.findById(employeeId)
+		.orElseThrow(() -> new EmployeeNotFoundException(employeeId));
 		
 	}
 
@@ -63,8 +70,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 			updateProfileEmployee.mapEmployeeUpdateProfileRequestDto(employeeProfile);
 			employeeRepository.save(employeeProfile);
 			return employeeProfile;
+		}else {
+			throw new EmployeeNotFoundException(employeeId);
 		}
-		return null;
 	}
 
 }

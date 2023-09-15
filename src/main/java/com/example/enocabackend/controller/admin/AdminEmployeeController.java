@@ -19,8 +19,7 @@ import com.example.enocabackend.services.EmployeeServiceImpl;
 @RestController
 @RequestMapping("/admin/employee")
 public class AdminEmployeeController {
-	
-	private EmployeeServiceImpl employeeService;
+private EmployeeServiceImpl employeeService;
 	
 	public AdminEmployeeController(EmployeeServiceImpl employeeService) {
 		this.employeeService = employeeService;
@@ -28,7 +27,7 @@ public class AdminEmployeeController {
 	 
 	@PostMapping("/createEmployee")
 	public Employee createOneEmployee(@RequestBody EmployeeCreateRequestDto newEmployeeRequest) {
-		return employeeService.createOneEmploye(newEmployeeRequest);
+		return employeeService.createOneEmployee(newEmployeeRequest);
 	}
 	
 	@GetMapping("/listEmployee")
@@ -49,7 +48,7 @@ public class AdminEmployeeController {
 	@DeleteMapping("/deleteEmployee/{employeeId}")
 	public void deleteOneEmployee(@PathVariable Long employeeId) {
 		employeeService.deleteOneEmployeeById(employeeId);
-	}
+	}	
 		
 	
 	

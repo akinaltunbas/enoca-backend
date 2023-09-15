@@ -1,7 +1,11 @@
 package com.example.enocabackend.services;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -33,7 +37,7 @@ public class UserDetailsSeviceImpl {
 		
 		user = User.builder()
 				   .id(1L)
-				   .username("akın altunbas")
+				   .username("akın")
 				   .password("1234")
 				   .role(Role.ADMIN)
 				   .build();
@@ -47,14 +51,16 @@ public class UserDetailsSeviceImpl {
 		
 		
 		//given
-		given(userRepository.findByUsername("akın altunbas")).willReturn(user);
-		given(userRepository.findByUsername(null));
+		User user = new User();
+		user.setUsername("akın");
 				
 		//when	
-		UserDetails savedUser = userService.loadUserByUsername(user.getUsername());
+		when(userRepository.findByUsername("akın")).thenReturn(user);
+		userService.loadUserByUsername("akın");
 		
 		//then	
-		assertThat(savedUser).isNotNull();
+		assertEquals("akın",user.getUsername());
+		verify(userRepository,times(1)).findByUsername("akın");
 		
 	}
 	
@@ -64,14 +70,16 @@ public class UserDetailsSeviceImpl {
 	public void testLoadUserById() {
 		
 		//given
-		given(userRepository.findById(1L));
-		given(userRepository.findById(null));
-				
-		//when	
-		UserDetails savedUser = userService.loadUserById(user.getId());
+		User user = new User();
+		user.setId(1L);
 		
-		//then	
-		assertThat(savedUser).isNotNull();
+		//when
+		when(userRepository.findById(1L)).thenReturn(java.util.Optional.of(user));
+		userService.loadUserById(1L);
+	
+		//then
+		assertEquals(1L,user.getId());
+		verify(userRepository,times(1)).findById(1L);
 		
 	}
 

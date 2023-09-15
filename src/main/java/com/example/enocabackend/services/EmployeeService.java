@@ -9,7 +9,7 @@ import com.example.enocabackend.entities.Employee;
 
 public interface EmployeeService {
 	
-	public Employee createOneEmploye(EmployeeCreateRequestDto newEmployeeRequest);
+	public Employee createOneEmployee(EmployeeCreateRequestDto newEmployeeRequest);
 	
 	public List<Employee> getAllEmployees();
 	
@@ -20,7 +20,7 @@ public interface EmployeeService {
 	public Employee updateEmployeeProfile(Long employeeId, EmployeeUpdateProfileRequestDto updateProfileEmployee);
 	
 	public void deleteOneEmployeeById(Long departmentId);
-	
+		
 	
 
 }

@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService{
 	public User createOneUser(UserCreateRequestDto newUserRequest) {
 		User user = new User();
 		newUserRequest.mapUserCreateRquestDto(user);;
-		user.setPassword(passwordEncoder.encode(newUserRequest.getPassword()));
+	//	user.setPassword(passwordEncoder.encode(newUserRequest.getPassword()));
 		return userRepository.save(user);
 	}
 

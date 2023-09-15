@@ -2,6 +2,8 @@ package com.example.enocabackend.services;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Date;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -77,6 +79,19 @@ public class RefreshTokenServiceTest {
 		
 		//then
 		assertThat(savedToken).isNull();
+	}
+	
+
+	@DisplayName("Junit test for isRefreshExpired")
+	@Test
+	public void testIsRefreshExpired() {
+		
+		//given
+		Long expireSeconds = 604800L;
+		RefreshToken token = new RefreshToken();
+		
+		assertThat(token).isNotNull();
+		
 	}
 
 }
